@@ -8,15 +8,33 @@
 import SwiftUI
 
 struct ContentView: View {
+    var emojiArray: [String] = ["⚽️", "🚗", "🐖", "🌝"]
+    var cardNumber: Int = 4
+    @State var emoji: String = "😂"
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]){
+                ForEach(emojiArray, id: \.self) {
+                    CardView(flipped: false, text: $0)
+                }
+            }
         }
         .padding()
+        Spacer()
+        HStack{
+            Button("-"){
+
+            }.padding().border(Color.blue)
+            Spacer()
+            Button("+"){
+                
+            }.padding().border(Color.blue)
+        }
+        
     }
+    
+    
+    
 }
 
 #Preview {
