@@ -8,34 +8,38 @@
 import SwiftUI
 
 struct ContentView: View {
-    var emojiArray: [String] = ["⚽️", "🚗", "🐖", "🌝"]
-    var cardNumber: Int = 4
-    @State var emoji: String = "😂"
+    var emojiArray: [String] = ["⚽️", "🚗", "🐖", "🌝", "🎃", "💊", "🤡", "🐝", "🐤", "🐽"]
+    @State var cardNumber: Int = 2
     var body: some View {
         VStack {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]){
-                ForEach(emojiArray, id: \.self) {
-                    CardView(flipped: false, text: $0)
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]){
+                    ForEach(0..<cardNumber, id: \.self) { i in
+                        CardView(text: emojiArray[i])
+                    }
                 }
             }
         }
         .padding()
         Spacer()
         HStack{
-            Button("-"){
-
-            }.padding().border(Color.blue)
+            adjustCardNumber(by: -2, symbol: "-").padding().border(Color.blue)
             Spacer()
-            Button("+"){
-                
-            }.padding().border(Color.blue)
+            adjustCardNumber(by: +2, symbol: "+").padding().border(Color.blue)
         }
+    }
+    
+    func adjustCardNumber(by offset: Int, symbol: String) -> some View {
+        Button(action: {
+            cardNumber += offset
+        }, label: {
+            Text(symbol)
+        }).disabled(cardNumber + offset < 2 || cardNumber + offset > emojiArray.count)
         
     }
     
-    
-    
 }
+               
 
 #Preview {
     ContentView()

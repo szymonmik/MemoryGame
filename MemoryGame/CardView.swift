@@ -13,23 +13,25 @@ struct CardView: View {
     
     var body: some View {
         ZStack{
-            RoundedRectangle(cornerRadius: 12)
-                .stroke(lineWidth: 10).fill(Color(.blue))
-                .font(.largeTitle)
-                .frame(height: 150)
-                .background(flipped ? Color(.white.opacity(0.1)) : Color(.blue))
-                .cornerRadius(12)
-                .onTapGesture {
-                    flipped = !flipped
-                }
-            Text(text)
-                .font(.largeTitle)
-                .opacity(flipped ? 1 : 0)
-                .onTapGesture {
-                    flipped = !flipped
-                }
+            Group{
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(lineWidth: 10).fill(Color(.blue))
+                    .font(.largeTitle)
+                    .background(flipped ? Color(.white.opacity(0.1)) : Color(.blue))
+                    .cornerRadius(12)
+                Text(text)
+                    .font(.largeTitle)
+                    .opacity(flipped ? 1 : 0)
+            }
+            
+                
+        }
+        .onTapGesture {
+            flipped = !flipped
         }
     }
+    
+    
 }
 
 #Preview {
