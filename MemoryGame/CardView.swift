@@ -10,14 +10,15 @@ import SwiftUI
 struct CardView: View {
     @State var flipped: Bool = false
     var text: String
+    let cardColor: Color
     
     var body: some View {
         ZStack{
             Group{
                 RoundedRectangle(cornerRadius: 12)
-                    .stroke(lineWidth: 10).fill(Color(.blue))
+                    .stroke(lineWidth: 10).fill(Color(cardColor))
                     .font(.largeTitle)
-                    .background(flipped ? Color(.white.opacity(0.1)) : Color(.blue))
+                    .background(flipped ? Color(.white.opacity(0.1)) : Color(cardColor))
                     .cornerRadius(12)
                 Text(text)
                     .font(.largeTitle)
@@ -35,5 +36,5 @@ struct CardView: View {
 }
 
 #Preview {
-    CardView(text: "😂")
+    CardView(text: "😂", cardColor: .red)
 }
