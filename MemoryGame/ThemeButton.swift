@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct ThemeButton: View {
+    @ObservedObject var viewModel: MemoGameViewModel
+    
     var text: String
     var symbol: String
-    @Binding var activeEmojiArr: Array<String>
-    @Binding var activeColor: Color
-    let newEmojiArr: Array<String>
-    let newColor: Color
+    var theme: Int
+    var color: Color = Color.blue
     
     var body: some View {
         Button(action: {
-            activeEmojiArr = newEmojiArr.shuffled()
-            activeColor = newColor
+            viewModel.changeTheme(theme: theme)
+            //viewModel.shuffle()
         }, label: {
             VStack{
                 Image(systemName: symbol).font(.largeTitle)
                 Text(text)
-            }.foregroundColor(activeColor)
+            }.foregroundColor(color)
         })
     }
 }

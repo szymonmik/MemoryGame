@@ -14,14 +14,14 @@ struct MemoGameModel<CardContent: Equatable>{
     
     init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent){
         cards = []
-        for i in 0...max(2, numberOfPairsOfCards){
+        for i in 0..<max(2, numberOfPairsOfCards){
             let content = cardContentFactory(i)
             cards.append(Card(content: content, id: "(\(i)a"))
             cards.append(Card(content: content, id: "(\(i)b"))
         }
     }
     
-    static func choose(card: CardContent){
+    func choose(_ card: Card){
         
     }
     
@@ -29,11 +29,17 @@ struct MemoGameModel<CardContent: Equatable>{
         cards.shuffle()
     }
     
-    struct Card: Identifiable{
+    struct Card: Identifiable, Equatable{
+        static func == (lhs: Card, rhs: Card) -> Bool {
+            return lhs.isFlipped == rhs.isFlipped &&
+            lhs.isMatched == rhs.isMatched &&
+            lhs.content == rhs.content
+        }
+        
         var id: String
         
-        var isFlipped: Bool = false
-        var isMatch: Bool = false
+        var isFlipped: Bool = true
+        var isMatched: Bool = false
         var content: CardContent
 
         init(content: CardContent, id: String) {

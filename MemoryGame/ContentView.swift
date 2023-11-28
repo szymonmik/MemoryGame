@@ -8,58 +8,46 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var themeColor: Color = .red
-    @State var emojiArr: [String] = ["👮‍♀️", "👮‍♀️", "🧑‍🍳", "🧑‍🍳", "👨‍🏫", "👨‍🏫", "👨‍🚀", "👨‍🚀"]
-    let EmojiArrPeople: [String] = ["👮‍♀️", "👮‍♀️", "🧑‍🍳", "🧑‍🍳", "👨‍🏫", "👨‍🏫", "👨‍🚀", "👨‍🚀"]
-    let EmojiArrFlags: [String] = ["🇵🇱", "🇵🇱", "🇷🇴", "🇷🇴", "🇵🇪", "🇵🇪", "🇳🇴", "🇳🇴", "🇪🇸", "🇪🇸", "🇱🇹", "🇱🇹", "🇯🇵", "🇯🇵", "🇫🇮", "🇫🇮"]
-    let EmojiArrAnimals: [String] = ["🦊", "🦊", "🐸", "🐸", "🐖", "🐖", "🐳", "🐳", "🐴", "🐴", "🐁", "🐁", "🦨", "🦨", "🐝", "🐝", "🐤", "🐤", "🐽", "🐽"]
-    @State var cardNumber: Int = 4
+    @ObservedObject var viewModel: MemoGameViewModel
     
     var body: some View {
         VStack {
             Text("Memo").font(.largeTitle)
             ScrollView {
-                Cards
+                cards
             }
         }
         .padding()
         Spacer()
         
+        Button("Shuffle", action: {
+            viewModel.shuffle()
+        })
+        .padding(4)
+        
         ThemeButtons
         
-        /*HStack{
-            adjustCardNumber(by: -2, symbol: "-").padding().border(Color.blue)
-            Spacer()
-            adjustCardNumber(by: +2, symbol: "+").padding().border(Color.blue)
-        }*/
     }
-    
-    /*func adjustCardNumber(by offset: Int, symbol: String) -> some View {
-        Button(action: {
-            cardNumber += offset
-        }, label: {
-            Text(symbol)
-        }).disabled(cardNumber + offset < 2 || cardNumber + offset > emojiArray.count)
-    }*/
-    
-    var Cards: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]){
-            ForEach(0..<emojiArr.count, id: \.self) { i in
-                CardView(text: emojiArr[i], cardColor: themeColor)
+
+    var cards: some View {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 85), spacing: 0)], spacing: 0){
+            ForEach(viewModel.cards.indices, id: \.self) { i in
+                CardView(card: viewModel.cards[i], cardColor: viewModel.themeColor)
                     .aspectRatio(2/3, contentMode: .fit)
+                    .padding(4)
                     
             }
-        }.foregroundColor(themeColor)
+        }.foregroundColor(viewModel.themeColor)
     }
     
     var ThemeButtons: some View {
         HStack{
             Spacer()
-            ThemeButton(text: "People", symbol: "face.smiling", activeEmojiArr: $emojiArr, activeColor: $themeColor, newEmojiArr: EmojiArrPeople, newColor: .red)
+            ThemeButton(viewModel: viewModel, text: "People", symbol: "face.smiling", theme: 1, color: .red)
             Spacer()
-            ThemeButton(text: "Flags", symbol: "ant.circle", activeEmojiArr: $emojiArr, activeColor: $themeColor, newEmojiArr: EmojiArrFlags, newColor: .blue)
+            ThemeButton(viewModel: viewModel, text: "Flags", symbol: "ant.circle", theme: 2, color: .blue)
             Spacer()
-            ThemeButton(text: "Animals", symbol: "cat.circle", activeEmojiArr: $emojiArr, activeColor: $themeColor, newEmojiArr: EmojiArrAnimals, newColor: .green)
+            ThemeButton(viewModel: viewModel, text: "Animals", symbol: "cat.circle", theme: 3, color: .green)
             Spacer()
         }
     }
@@ -68,5 +56,5 @@ struct ContentView: View {
                
 
 #Preview {
-    ContentView()
+    ContentView(viewModel: MemoGameViewModel())
 }

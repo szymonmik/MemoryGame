@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct CardView: View {
-    @State var flipped: Bool = false
-    var text: String
+    let card: MemoGameModel<String>.Card
     let cardColor: Color
     
     var body: some View {
@@ -18,23 +17,22 @@ struct CardView: View {
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(lineWidth: 10).fill(Color(cardColor))
                     .font(.largeTitle)
-                    .background(flipped ? Color(.white.opacity(0.1)) : Color(cardColor))
+                    .background(card.isFlipped ? Color(.white.opacity(0.1)) : Color(cardColor))
                     .cornerRadius(12)
-                Text(text)
-                    .font(.largeTitle)
-                    .opacity(flipped ? 1 : 0)
+                Text(card.content)
+                    .font(.system(size: 200))
+                    .minimumScaleFactor(0.01)
+                    .aspectRatio(1, contentMode: .fit)
+                    .opacity(card.isFlipped ? 1 : 0)
             }
-            
-                
-        }
-        .onTapGesture {
-            flipped = !flipped
         }
     }
     
     
 }
 
+/*
 #Preview {
     CardView(text: "😂", cardColor: .red)
 }
+*/
