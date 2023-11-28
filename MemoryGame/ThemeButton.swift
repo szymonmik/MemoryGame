@@ -18,7 +18,7 @@ struct ThemeButton: View {
     var body: some View {
         Button(action: {
             viewModel.changeTheme(theme: theme)
-            //viewModel.shuffle()
+            viewModel.shuffle()
         }, label: {
             VStack{
                 Image(systemName: symbol).font(.largeTitle)

@@ -15,6 +15,7 @@ struct ContentView: View {
             Text("Memo").font(.largeTitle)
             ScrollView {
                 cards
+                    .animation(.default, value: viewModel.cards)
             }
         }
         .padding()
@@ -23,8 +24,9 @@ struct ContentView: View {
         Button("Shuffle", action: {
             viewModel.shuffle()
         })
-        .padding(4)
-        
+        .buttonStyle(.borderedProminent)
+        .tint(viewModel.themeColor)
+        .padding()
         ThemeButtons
         
     }
@@ -47,11 +49,11 @@ struct ContentView: View {
     var ThemeButtons: some View {
         HStack{
             Spacer()
-            ThemeButton(viewModel: viewModel, text: "People", symbol: "face.smiling", theme: 1, color: .red)
+            ThemeButton(viewModel: viewModel, text: "People", symbol: "face.smiling", theme: 1, color: viewModel.themeColor)
             Spacer()
-            ThemeButton(viewModel: viewModel, text: "Flags", symbol: "ant.circle", theme: 2, color: .blue)
+            ThemeButton(viewModel: viewModel, text: "Flags", symbol: "ant.circle", theme: 2, color: viewModel.themeColor)
             Spacer()
-            ThemeButton(viewModel: viewModel, text: "Animals", symbol: "cat.circle", theme: 3, color: .green)
+            ThemeButton(viewModel: viewModel, text: "Animals", symbol: "cat.circle", theme: 3, color: viewModel.themeColor)
             Spacer()
         }
     }

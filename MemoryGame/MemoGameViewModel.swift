@@ -13,7 +13,7 @@ class MemoGameViewModel: ObservableObject{
     private static let EmojiArrAnimals: [String] = ["🦊", "🐸", "🐖", "🐳", "🐴", "🐁", "🦨", "🐝"]
     
     static func createGameModel() -> MemoGameModel<String> {
-        return MemoGameModel<String>(numberOfPairsOfCards: 8) { index in
+        return MemoGameModel<String>(numberOfPairsOfCards: currentEmojis.count) { index in
             if(currentEmojis.indices.contains(index)){
                 return currentEmojis[index]
             } 

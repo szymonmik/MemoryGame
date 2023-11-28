@@ -23,14 +23,14 @@ struct MemoGameModel<CardContent: Equatable>{
     
     var indexOfOneAndOnlyFaceUpCard: Int?{
         get{
-            var flippedCardIndices = [Int]()
+            var flippedCards = [Int]()
             for index in cards.indices{
                 if cards[index].isFlipped{
-                    flippedCardIndices.append(index)
+                    flippedCards.append(index)
                 }
             }
-            if flippedCardIndices.count == 1{
-                return flippedCardIndices.first
+            if flippedCards.count == 1{
+                return flippedCards.first
             } else{
                 return nil
             }
