@@ -16,13 +16,60 @@ struct MemoGameModel<CardContent: Equatable>{
         cards = []
         for i in 0..<max(2, numberOfPairsOfCards){
             let content = cardContentFactory(i)
-            cards.append(Card(content: content, id: "(\(i)a"))
-            cards.append(Card(content: content, id: "(\(i)b"))
+            cards.append(Card(content: content, id: "\(i)a"))
+            cards.append(Card(content: content, id: "\(i)b"))
         }
     }
     
-    func choose(_ card: Card){
+    var indexOfOneAndOnlyFaceUpCard: Int?{
+        get{
+            var flippedCardIndices = [Int]()
+            for index in cards.indices{
+                if cards[index].isFlipped{
+                    flippedCardIndices.append(index)
+                }
+            }
+            if flippedCardIndices.count == 1{
+                return flippedCardIndices.first
+            } else{
+                return nil
+            }
+        }
         
+        set{
+            for index in cards.indices{
+                if index == newValue{
+                    cards[index].isFlipped = true
+                } else{
+                    cards[index].isFlipped = false
+                }
+            }
+        }
+    }
+    
+    mutating func choose(_ card: Card){
+        if let chosenCardIndex = cards.firstIndex(where: { $0.id == card.id }){
+            if !cards[chosenCardIndex].isFlipped && !cards[chosenCardIndex].isMatched{
+                if let secondCardIndex = indexOfOneAndOnlyFaceUpCard{
+                    if cards[chosenCardIndex].content == cards[secondCardIndex].content{
+                        cards[chosenCardIndex].isMatched = true
+                        cards[secondCardIndex].isMatched = true
+                    }
+                } else{
+                    indexOfOneAndOnlyFaceUpCard = chosenCardIndex
+                }
+                cards[chosenCardIndex].isFlipped = true
+            }
+        }
+    }
+    
+    func index(of card: Card) -> Int? {
+        for index in cards.indices {
+            if cards[index].id == card.id {
+                return index
+            }
+        }
+        return nil
     }
     
     mutating func shuffle(){
@@ -38,7 +85,7 @@ struct MemoGameModel<CardContent: Equatable>{
         
         var id: String
         
-        var isFlipped: Bool = true
+        var isFlipped: Bool = false
         var isMatched: Bool = false
         var content: CardContent
 

@@ -25,6 +25,7 @@ struct CardView: View {
                     .aspectRatio(1, contentMode: .fit)
                     .opacity(card.isFlipped ? 1 : 0)
             }
+            .opacity(card.isFlipped || !card.isMatched ? 1 : 0)
         }
     }
     
