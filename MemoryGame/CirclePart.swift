@@ -6,24 +6,33 @@
 //
 
 import SwiftUI
+import CoreGraphics
 
 struct CirclePart: Shape {
+    var startAngle: Angle = .zero
+    let endAngle: Angle
     func path(in rect: CGRect) -> Path {
-        Path { path in
-                    
-            path.move(to: CGPoint(x: rect.midX, y: rect.midY))
-            path.addArc(center: CGPoint(x: rect.midX, y: rect.midY), radius: 180, startAngle: .degrees(-90), endAngle: .degrees(160), clockwise: false)
-                    
-            //path.move(to: CGPoint(x: rect.midX, y: rect.midY))
-            //path.addLine(to: CGPoint(x: rect.midX, y: rect.maxY))
-            //path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
-            //path.addLine(to: CGPoint(x: rect.midX, y: rect.minY))
-        }
+        let center = CGPoint(x: rect.midX, y: rect.midY)
+        let radius = min(rect.width, rect.height)/2
+        let start = CGPoint(
+            x: center.x + radius * cos(startAngle.radians),
+            y: center.y + radius * sin(startAngle.radians)
+        )
+        
+        var path = Path()
+        path.move(to: center)
+        path.addLine(to: start)
+        path.addArc(center: center,
+                    radius: radius,
+                    startAngle: startAngle,
+                    endAngle: endAngle,
+                    clockwise: false)
+        path.addLine(to: center)
+        return path
     }
-    
 }
 
 #Preview {
-    CirclePart()
+    CirclePart(startAngle: .degrees(-90), endAngle: .degrees(160))
         .fill(.blue)
 }

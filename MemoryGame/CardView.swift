@@ -12,24 +12,17 @@ struct CardView: View {
     let cardColor: Color
     
     var body: some View {
-        ZStack{
-            Group{
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(lineWidth: 10).fill(Color(cardColor))
-                    .font(.largeTitle)
-                    .background(card.isFlipped ? Color(.white.opacity(0.1)) : Color(cardColor))
-                    .cornerRadius(12)
+        CirclePart(startAngle: .degrees(-90), endAngle: .degrees(160))
+            .overlay(content: {
                 Text(card.content)
                     .font(.system(size: 200))
                     .minimumScaleFactor(0.01)
                     .aspectRatio(1, contentMode: .fit)
                     .opacity(card.isFlipped ? 1 : 0)
-            }
+            })
+            .transformIntoCard(isFlipped: card.isFlipped, cardColor: cardColor)
             .opacity(card.isFlipped || !card.isMatched ? 1 : 0)
-        }
     }
-    
-    
 }
 
 /*

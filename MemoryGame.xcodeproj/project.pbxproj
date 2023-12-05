@@ -18,6 +18,7 @@
 		3F456E212B162272002E405D /* CirclePart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F456E202B162272002E405D /* CirclePart.swift */; };
 		3F67536E2B03AE9700E48DFE /* MemoGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F67536D2B03AE9700E48DFE /* MemoGameModel.swift */; };
 		3F6753702B03B11700E48DFE /* MemoGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F67536F2B03B11700E48DFE /* MemoGameViewModel.swift */; };
+		3FEA41E62B1F64D40073F951 /* TransformIntoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEA41E52B1F64D40073F951 /* TransformIntoCard.swift */; };
 		B6C6E1BE2AFAC28300E1C8DA /* ThemeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6E1BD2AFAC28300E1C8DA /* ThemeButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		3F456E202B162272002E405D /* CirclePart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePart.swift; sourceTree = "<group>"; };
 		3F67536D2B03AE9700E48DFE /* MemoGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoGameModel.swift; sourceTree = "<group>"; };
 		3F67536F2B03B11700E48DFE /* MemoGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoGameViewModel.swift; sourceTree = "<group>"; };
+		3FEA41E52B1F64D40073F951 /* TransformIntoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformIntoCard.swift; sourceTree = "<group>"; };
 		B6C6E1BD2AFAC28300E1C8DA /* ThemeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,6 +115,7 @@
 				3F67536D2B03AE9700E48DFE /* MemoGameModel.swift */,
 				3F67536F2B03B11700E48DFE /* MemoGameViewModel.swift */,
 				3F456E202B162272002E405D /* CirclePart.swift */,
+				3FEA41E52B1F64D40073F951 /* TransformIntoCard.swift */,
 			);
 			path = MemoryGame;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 			files = (
 				3F67536E2B03AE9700E48DFE /* MemoGameModel.swift in Sources */,
 				3F222D0D2ADEB525004FD472 /* ContentView.swift in Sources */,
+				3FEA41E62B1F64D40073F951 /* TransformIntoCard.swift in Sources */,
 				3F456E212B162272002E405D /* CirclePart.swift in Sources */,
 				3F6753702B03B11700E48DFE /* MemoGameViewModel.swift in Sources */,
 				3F222D352ADEB742004FD472 /* CardView.swift in Sources */,
